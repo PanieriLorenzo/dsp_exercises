@@ -49,5 +49,7 @@ $$\Re\{Ae^{j\phi}e^{j\omega_0 t}\}=\cos(...)$$
 
 If you need to sum a bunch of sinusoids that have the same frequency, just transform them to polar form, add them together, multiply the result by $e^{j\omega_0 t}$ and take the real part and that's the sum.
 
+# Spectrum Representation
+
 
 
