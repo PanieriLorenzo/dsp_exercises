@@ -35,6 +35,8 @@ Complex exponentials are basically vectors that spin around the origin. The x an
 
 $$A e^{j(\omega_0 t+\varphi)} = A\cos(\omega_0 t + \varphi) + jA\sin(\omega_0 t + \varphi)$$
 
+$$\Re\{A e^{j(\omega_0 t+\varphi)}\} = A\cos(\omega_0 t + \varphi)$$
+
 ### Regneregler
 
 $$\cos\theta = \dfrac{e^{j\theta} + e^{-j\theta}}{2}$$
@@ -133,3 +135,4 @@ Sinc is the ideal interpolation, but it requires infinite samples so it's not po
 
 ![image-20210610143819429](image-20210610143819429.png)
 
+# 

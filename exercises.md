@@ -1,4 +1,4 @@
-# Chapter 2
+# Chapter 2 (Week 1)
 
 ## Exercise 2.1 - Plotting in Matlab
 
@@ -94,4 +94,68 @@ Skipped the rest cause it's the same.
 ![image-20210609140330006](image-20210609140330006.png)
 
 
+
+# Chapter 3 (Week 2)
+
+## Exercise 3.1 - Reading Spectrum Representation
+
+![image-20210610150322777](image-20210610150322777.png)
+
+![image-20210610150339320](image-20210610150339320.png)
+
+**a)**
+
+$x(t) = 11 + 14\cos(100\pi-\pi/3)+8\cos(350\pi-\pi/2)$
+
+**b)**
+
+Yes. Its fundamental frequency is the greatest common divisor between the frequencies of the two cosines. Then you take the reciprocal.
+
+```matlab
+clear
+gcd(50, 175)
+% 25
+```
+
+**c)**
+
+Because otherwise the signal would be complex, and that doesn't make sense for real signals.
+
+## Exercise 3.3 - Standard Form to Spectrum Form
+
+![image-20210610150411913](image-20210610150411913.png)
+
+**a)**
+
+$z(t) = 2 + \cos(t) + 2\cos(2 t) + \Re\{2 e^{j\pi/3} e^{j3t}\}$
+
+$z(t)=2+\cos(t)+2\cos(2t)+2\cos(3t+\pi/3)$
+
+**b)**
+
+Bruh I don't feel like it.
+
+## Exercise 3.4 -
+
+![image-20210610150428345](image-20210610150428345.png)
+
+
+
+## Exercise 3.9 -
+
+![image-20210610150452607](image-20210610150452607.png)
+
+## Exercise 3.13 -
+
+![image-20210610150514717](image-20210610150514717.png)
+
+## Exercise 3.16 -
+
+![image-20210610150539693](image-20210610150539693.png)
+
+## Exercise 3.24 -
+
+![image-20210610150610065](image-20210610150610065.png)
+
+# Chapter 4 (Week 3)
 
