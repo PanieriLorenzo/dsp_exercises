@@ -195,9 +195,33 @@ This gives a formula for the response of the filter to any given frequency:
 
 $\mathcal H(\hat\omega)=\displaystyle\sum_k^M b_k e^{j\hat\omega k}$
 
+## Regneregler
 
+Superposition:
 
+$\mathcal H_3 = a\mathcal H_1 + b\mathcal H_2$
 
+Adding or scaling two frequency responses together gives a new frequency response, i.e. they are a linear combination.
+
+## Difference Equations
+
+This is a difference equation:
+
+$y[n]=x[n] + x[n-1]$
+
+This is also a difference equation:
+
+$y[n]=x[n] - y[n - 1]$
+
+So a FIR filter with weights: $b=(1, 0.5, 0.33, 0.25)$
+
+$y[n] = b_0x[n-3]+b_1x[n-2]+b_2x[n-1]+b_3x[n]$
+
+$y[n]=x[n-3]+0.5x[n-2]+0.33x[n-1]+0.25x[n]$
+
+ ## Cascaded FIR Filters
+
+![image-20210611155944494](image-20210611155944494.png)
 
 
 
