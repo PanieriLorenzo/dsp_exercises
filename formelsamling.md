@@ -141,7 +141,7 @@ Sinc is the ideal interpolation, but it requires infinite samples so it's not po
 
 ![image-20210610143819429](image-20210610143819429.png)
 
-# 4. FIR Filters
+# 4 & 5. FIR Filters
 
 A FIR filter is basically:
 
@@ -175,9 +175,29 @@ $y[n]=x[n]*h[n]$
 
 ###### ![image-20210611145150546](image-20210611145150546.png)
 
+For a finite impulse response of size $M$, the convolution is the same as the definition of FIR filters. I.e.:
+
+$y[n]=x[n]*h[n]=\displaystyle\sum_k^M x[n]h[n-k]=\sum_k^M b_kx[n-k]$
+
 If the window or the signal are not infinite, the sum will also not be infinite. So it can in general be done.7
 
 ![image-20210611145820579](image-20210611145820579.png)
+
+## Frequency Response
+
+For an arbitrary discrete sinusoid input $x$, the response of the filter is:
+
+$x[n]=Ae^{j\phi}e^{j\hat\omega n}$
+
+$\begin{aligned}y[n]&=\displaystyle\sum_k^M b_k Ae^{j\phi}e^{j\hat\omega (n-k)}\\&=\left(\sum_k^M b_k e^{j\hat\omega k}\right)Ae^{j\phi}e^{j\hat\omega n}\\&=\mathcal H(\hat\omega)Ae^{j\phi}e^{j\hat\omega n}\end{aligned} $
+
+This gives a formula for the response of the filter to any given frequency:
+
+$\mathcal H(\hat\omega)=\displaystyle\sum_k^M b_k e^{j\hat\omega k}$
+
+
+
+
 
 
 
