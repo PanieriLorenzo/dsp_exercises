@@ -135,27 +135,41 @@ $z(t)=2+\cos(t)+2\cos(2t)+2\cos(3t+\pi/3)$
 
 Bruh I don't feel like it.
 
-## Exercise 3.4 -
+## Exercise 3.4 - TODO
 
 ![image-20210610150428345](image-20210610150428345.png)
 
 
 
-## Exercise 3.9 -
+## Exercise 3.9 - TODO
 
 ![image-20210610150452607](image-20210610150452607.png)
 
-## Exercise 3.13 -
+## Exercise 3.13 - TODO
 
 ![image-20210610150514717](image-20210610150514717.png)
 
-## Exercise 3.16 -
+## Exercise 3.16 - TODO
 
 ![image-20210610150539693](image-20210610150539693.png)
 
-## Exercise 3.24 -
+## Exercise 3.24 - TODO
 
 ![image-20210610150610065](image-20210610150610065.png)
 
 # Chapter 4 (Week 3)
+
+## Exercise 4.1 -
+
+![image-20210611120329336](image-20210611120329336.png)
+
+
+
+## Exercise 4.8 -
+
+## Exercise 4.12 -
+
+## Exercise 4.15 -
+
+## Exercise 4.17 -
 

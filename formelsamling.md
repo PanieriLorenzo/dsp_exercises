@@ -109,6 +109,12 @@ Nyquist frequency/ Nyquist limit: $f_s/2$
 
 ![image-20210610141953102](image-20210610141953102.png)
 
+### Magic Formula of Aliasing
+
+![image-20210611133546085](image-20210611133546085.png)
+
+
+
 ## Digital to Continuous
 
 ![image-20210610142626341](image-20210610142626341.png)
@@ -135,4 +141,43 @@ Sinc is the ideal interpolation, but it requires infinite samples so it's not po
 
 ![image-20210610143819429](image-20210610143819429.png)
 
-# 
+# 4. FIR Filters
+
+A FIR filter is basically:
+
+* A rolling average where we can freely choose the weights of the inputs.
+* A convolution of the input signal with the filter impulse response.
+
+$y[n]=\displaystyle\sum_k^M b_kx[n-k]$
+
+Where :
+
+* $M$ is the size of the filter window.
+* $b$ is an array of weights.
+
+## Impulse Response
+
+The impulse response of a system is:
+
+$\delta[n]\Rightarrow\text{system}\Rightarrow h[n]$
+
+Where $\delta$ is the unit impulse function: $\begin{cases}1\quad n=0\\0\quad n\neq0\end{cases}$
+
+So the impulse response of a FIR filter is:
+
+$h[n]=\displaystyle\sum_k^M b_k\delta[n-k]$
+
+## Convolution
+
+If you have the impulse response of a system, you can filter a signal by taking the convolution:
+
+$y[n]=x[n]*h[n]$
+
+###### ![image-20210611145150546](image-20210611145150546.png)
+
+If the window or the signal are not infinite, the sum will also not be infinite. So it can in general be done.7
+
+![image-20210611145820579](image-20210611145820579.png)
+
+
+
