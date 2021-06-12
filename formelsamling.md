@@ -272,5 +272,79 @@ $\mathcal H_{hp}(\hat\omega)=\begin{cases}0\quad|\hat\omega|\leq\hat\omega_{cut}
 
 $h_{hp}[n]=IDTFT\{\mathcal H_{hp}(\hat\omega)\}=\delta[n]-h_{lp}[n]=\delta[n]-\dfrac{\sin(\hat\omega_{cut}n)}{\pi n}\quad-\infty<n<\infty$
 
-# 7. 
+# 7. Discrete Fourier Transform (DFT) & Fast Fourier Transform (FFT)
+
+We can take the Fourier transform of a finite signal by discretizing the frequency spectrum. This gives us the Discrete Fourier Transform (DFT).
+
+$X[k]=DFT\{x[n]\}\displaystyle=\sum_{n=0}^{N-1}x[n]e^{-j(2\pi/N)kn}$
+
+ Where:
+
+$k \in [0,N-1]$
+
+I.e. for a finite signal of size $N$, the DFT produces a spectrum of size $N$. The entries in the spectrum are called "bins". They are complex numbers, where the magnitude of the number is the amplitude of that frequency, and the angle is the phase.
+
+The bigger the signal, the more fine-grained the frequency spectrum becomes, this is a practical example of the *Heisenberg uncertainty principle.*
+
+## Inverse DFT
+
+$x[n]=IDFT\{X[k]\}=\displaystyle\dfrac{1}{N}\sum_{n=0}^{N-1}x[n]e^{j(2\pi/N)kn}$
+
+Notice how the formula for the inverse DFT is almost identical to the normal DFT.
+
+## Table of Common DFTs
+
+TODO
+
+## Fast Fourier Transform (FFT)
+
+The naïve DFT has a time complexity of $\mathcal O(N^2)$, a better algorithm called the Fast Fourier Transform has time complexity $\mathcal O(N\log N)$.
+
+Notably, the FFT only works if $N$ is a power of 2, i.e. $log_2N\in\N$
+
+The algorithm is recursive:
+
+* Base case: size of the input array is 2, DFT is trivial.
+
+  ![image-20210612150537655](image-20210612150537655.png)
+
+* Recursive case: perform the DFT of the vector formed by all the even entries and the vector formed by all the odd entries (recursively), then combine them (see pseudocode)
+
+```python
+# x is an array of floating point numbers, with a size that is a power of 2
+def fft(x):
+    # instantiate the output array, with the same size as the input
+    X = [0.0] * len(x)
+    
+    # base case: the array is of size 2, then the DFT is trivial
+    if len(x) == 2:
+    	X[0] = x[0] + x[1]
+        X[1] = x[0] - x[1]
+        return X
+    
+    # recursive case: take the DFT of the arrays formed by the odd terms and the even
+    # terms, and combine them together
+    else:
+        fft_even = fft(x[0::2])  # the [0::2] slice operator takes every other entry
+        					     # starting from 0, so all the even entries: 0, 2, 4 ...
+        fft_odd  = fft(x[1::2])  # the [1::2] slice operator takes every other entry
+        						 # starting from 1, so all the odd entries: 1, 3, 5 ...
+            
+        # iterate over output array
+        for k in range(len(x)//2):
+            # first half of output:
+            X[k]             = fft_even[k] + fft_odd[k] * exp(-2j*pi*k/N)
+            # second half of the output
+         	x[k + len(x)//2] = fft_even[k] - fft_odd[k] * exp(-2j*pi*k/N)
+        return X
+        
+```
+
+For an 8-point DFT, the algorithm can be summarized by this block diagram:
+
+![image-20210612151302599](image-20210612151302599.png)
+
+The inverse FFT (IFFT) is almost identical, the only differences are: that the sign of `j` in the the `exp(2j*pi*k/N)` term is flipped (so `exp(2j*pi*k/N)` instead `exp(-2j*pi*k/N)`); and that each entry of the output vector is divided by $N$ at the end.
+
+# 8. Z-Transform
 
