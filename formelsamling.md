@@ -191,7 +191,7 @@ $x[n]=Ae^{j\phi}e^{j\hat\omega n}$
 
 $\begin{aligned}y[n]&=\displaystyle\sum_k^M b_k Ae^{j\phi}e^{j\hat\omega (n-k)}\\&=\left(\sum_k^M b_k e^{j\hat\omega k}\right)Ae^{j\phi}e^{j\hat\omega n}\\&=\mathcal H(\hat\omega)Ae^{j\phi}e^{j\hat\omega n}\end{aligned} $
 
-This gives a formula for the response of the filter to any given frequency:
+This gives a formula for the response of the filter to a small set of frequencies:
 
 $\mathcal H(\hat\omega)=\displaystyle\sum_k^M b_k e^{j\hat\omega k}$
 
@@ -224,4 +224,53 @@ $y[n]=x[n-3]+0.5x[n-2]+0.33x[n-1]+0.25x[n]$
 ![image-20210611155944494](image-20210611155944494.png)
 
 
+
+# 6. Discrete-Time Fourier Transform (DTFT)
+
+Generalizing the concept of frequency response, we get the Discrete Time Fourier Transform (DTFT) which allows us to take the frequency spectrum of any signal, with the constraint that the signal needs to be infinite, so the DTFT is only computable analytically.
+
+$\mathcal H(\hat\omega) = frequency\_response\{h[n]\}=\displaystyle\sum_k^M h[n]e^{-j\hat\omega k}$
+
+$\Downarrow$ generalizes to
+
+$X(\hat\omega)=DTFT\{x[n]\}=\displaystyle\sum_{n=-\infty}^\infty x[n]e^{-j\hat\omega n}$
+
+## Inverse DTFT
+
+$x[n] = IDTFT\{X(\hat\omega)\}=\dfrac{1}{2\pi}\displaystyle\int_{-\pi}^\pi X(\hat\omega)e^{j\hat\omega n}d\hat\omega$
+
+## Common DTFT Table
+
+TODO
+
+## Properties of DTFT Table
+
+| Name of Property | Time-domain               | Frequency-domain                    |
+| ---------------- | ------------------------- | ----------------------------------- |
+| Linearity        | $ax_1[n]+bx_2[n]$         | $aX_1(\hat\omega)+bX_2(\hat\omega)$ |
+| Time delay       | $x[n-n_d]$                | $X(\hat\omega)e^{-j\hat\omega n_d}$ |
+| Frequency shift  | $e^{j\hat\omega_0 n}h[n]$ | $X(\hat\omega - \hat\omega_0)$      |
+| Convolution      | $x[n]*h[n]$               | $X(\hat\omega)H(\hat\omega)$        |
+
+## Energy of a Signal
+
+$energy=\displaystyle\sum_{-\infty}^\infty x[n]^2=\dfrac{1}{2\pi}\int_{-\pi}^\pi |X(\hat\omega)|^2 d\hat\omega$
+
+## Ideal Filters
+
+Ideal low-pass:
+
+$\mathcal H_{lp}(\hat\omega)=\begin{cases}1\quad|\hat\omega|\leq\hat\omega_{cut}\\0\quad\hat\omega_{cut}<|\hat\omega_{cut}|\leq\pi\end{cases}$
+
+$h_{lp}[n]=IDTFT\{\mathcal H_{lp}(\hat\omega)\}=\dfrac{\sin(\hat\omega_{cut}n)}{\pi n}\quad-\infty<n<\infty$
+
+This is very similar to the sinc function.
+
+Ideal high-pass:
+
+$\mathcal H_{hp}(\hat\omega)=\begin{cases}0\quad|\hat\omega|\leq\hat\omega_{cut}\\1\quad\hat\omega_{cut}<|\hat\omega_{cut}|\leq\pi\end{cases}$
+
+$h_{hp}[n]=IDTFT\{\mathcal H_{hp}(\hat\omega)\}=\delta[n]-h_{lp}[n]=\delta[n]-\dfrac{\sin(\hat\omega_{cut}n)}{\pi n}\quad-\infty<n<\infty$
+
+# 7. 
 
