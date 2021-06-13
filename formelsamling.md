@@ -141,7 +141,7 @@ Sinc is the ideal interpolation, but it requires infinite samples so it's not po
 
 ![image-20210610143819429](image-20210610143819429.png)
 
-# 4 & 5. FIR Filters
+# 4 & 5. Finite Impulse Response (FIR) Filters
 
 A FIR filter is basically:
 
@@ -394,10 +394,41 @@ TODO
 | Time delay                | $x[n-n_0]$        | $z^{-n_0}X(z)$    | $e^{-j\hat\omega n_0}X(\hat\omega)$ |
 | Convolution               | $h[n]*x[n]$       | $H(z)X(z)$        | $H(\hat\omega)X(\hat\omega)$        |
 
-# 9. IIR Filters
+# 9. Infinite Impulse Response (IIR) Filters
 
 IIR filters have feedback, i.e. their difference equation contains references to the output of the function, i.e. it's a form of discrete differential equation:
 
 $y[n]=\displaystyle\sum_{l=1}^{N}a_ly[n-l]+\sum_{k=0}^Mb_ky[n-k]$
 
-This is the **general differential equation** you have two sums: previous outputs and previous inputs. Which means it 
+This is the **general differential equation** you have two sums: previous outputs and previous inputs, multiplied with some coefficients. In this case our signal $x$ and the output $y$ are assumed to be 0 for negative times, i.e. we start the computation at index 0, and whenever we go out of bounds, i.e. have a negative index, we assume the value is 0.
+
+If we take the z-transform we get:
+
+$Y(z)=X(z)H(z)=X(z)\dfrac{b_0 + b_1z^{-1}+ b_2z^{-2} + \dots}{a_1z^{-1} + a_2z^{-2}+\dots}$
+
+The roots of the **numerator** are called **zeros**
+
+The roots of the **denominator** are called **poles**
+
+Because IIR filters have a feedback path in them, they decay exponentially and their impulse response approaches 0 asymptotically, but only reaches 0 after infinite time, therefore they are called infinite impulse response filters (IIR)
+
+## Stability
+
+In order to be stable the following condition must be satisfied:
+
+$\left|\displaystyle\sum_0^\infty h[n]\right|<\infty$
+
+Same condition in z-domain is that all poles must be contained within the disc described by the unit circle.
+
+## Block Diagrams
+
+This is a block diagram for a difference equation:
+
+![img](https://upload.wikimedia.org/wikipedia/commons/d/d5/IIR-filter.png)
+
+**Imagine that the blocks that have a T in them, have a $z^{-1}$ in them instead. I couldn't find a good picture** 
+
+Sometimes it is represented in this more compact form, they are equivalent. This form cuts down on the number of delay operations, but is harder to read.
+
+![block diagram of the 2 pole IIR filter used as reference design | Download  Scientific Diagram](https://www.researchgate.net/profile/Robert-Trausmuth/publication/228708960/figure/fig4/AS:669452899192850@1536621417560/block-diagram-of-the-2-pole-IIR-filter-used-as-reference-design.png)
+
