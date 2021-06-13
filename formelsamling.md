@@ -348,3 +348,56 @@ The inverse FFT (IFFT) is almost identical, the only differences are: that the s
 
 # 8. Z-Transform
 
+The z-transform transforms a vector $x$ into a complex polynomial $p(z)$. Every sample in $x$ becomes a coefficient of a term of the polynomial. The exponent of the term is a negative number, which is the negative of the index of the input vector its coefficient is taken from:
+
+$X(z) =\displaystyle\sum_{n=0}^{N-1} x[n]z^{-n}$
+
+Or the generalized form, for an infinite signal $x$:
+
+$X(z)=\displaystyle\sum_{n=-\infty}^\infty x[n]z^{-n}$
+
+Example:
+
+$\begin{matrix}( & 1 & 2 & 3 & 5 & 8 & )\\ &\downarrow&\downarrow&\downarrow&\downarrow&\downarrow\\ &1 &+2z^{-1} &+3z^{-2} &+5z^{-3} &+8z^{-4}\end{matrix}$
+
+## Z-Transform of Time Delay
+
+z-transforms are useful because they describe time delays very easily.
+
+This is a time delay by $d$ samples in time-domain:
+
+$x[n]\to x[n-d]$
+
+The same in z-domain:
+
+$X(z)\to X(z)z^{-d}$
+
+## Z-Transform of FIR Filters
+
+$y[n]=\displaystyle\sum_{k=0}^M b_kx[n-k]$
+
+$\Downarrow$
+
+$Y(z)=\left(\displaystyle\sum_{k=0}^Mb_kz^{-k}\right)X(z)$
+
+The part in parentheses is written as $H(z)$ and is called the system-function. 
+
+## Z-Transform of IIR Filters
+
+TODO
+
+## Properties
+
+| Property                  | n-domain          | z-domain          | $\hat\omega$-domain                 |
+| ------------------------- | ----------------- | ----------------- | ----------------------------------- |
+| Linearity (superposition) | $ax_1[n]+bx_2[n]$ | $aX_1(z)+bX_2(z)$ | $aX_1(\hat\omega)+bX_2(\hat\omega)$ |
+| Time delay                | $x[n-n_0]$        | $z^{-n_0}X(z)$    | $e^{-j\hat\omega n_0}X(\hat\omega)$ |
+| Convolution               | $h[n]*x[n]$       | $H(z)X(z)$        | $H(\hat\omega)X(\hat\omega)$        |
+
+# 9. IIR Filters
+
+IIR filters have feedback, i.e. their difference equation contains references to the output of the function, i.e. it's a form of discrete differential equation:
+
+$y[n]=\displaystyle\sum_{l=1}^{N}a_ly[n-l]+\sum_{k=0}^Mb_ky[n-k]$
+
+This is the **general differential equation** you have two sums: previous outputs and previous inputs. Which means it 
