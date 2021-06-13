@@ -394,7 +394,7 @@ TODO
 | Time delay                | $x[n-n_0]$        | $z^{-n_0}X(z)$    | $e^{-j\hat\omega n_0}X(\hat\omega)$ |
 | Convolution               | $h[n]*x[n]$       | $H(z)X(z)$        | $H(\hat\omega)X(\hat\omega)$        |
 
-# 9. Infinite Impulse Response (IIR) Filters
+# 9 & 10. Infinite Impulse Response (IIR) Filters
 
 IIR filters have feedback, i.e. their difference equation contains references to the output of the function, i.e. it's a form of discrete differential equation:
 
@@ -431,4 +431,64 @@ This is a block diagram for a difference equation:
 Sometimes it is represented in this more compact form, they are equivalent. This form cuts down on the number of delay operations, but is harder to read.
 
 ![block diagram of the 2 pole IIR filter used as reference design | Download  Scientific Diagram](https://www.researchgate.net/profile/Robert-Trausmuth/publication/228708960/figure/fig4/AS:669452899192850@1536621417560/block-diagram-of-the-2-pole-IIR-filter-used-as-reference-design.png)
+
+## Frequency Response From z-domain
+
+From z-domain system equation:
+
+$H(z) = \dfrac{b_0+b_1z^{-1}+\dots}{1 - a_1z^{-1} + \dots}$
+
+Then insert $z = e^{j\hat\omega}$ to get the frequency and phase response, i.e. the complex frequency response:
+
+$H(\hat\omega)=\dfrac{b_0+b_1e^{-j\hat\omega}+\dots}{1-a_1e^{-j\hat\omega}+\dots}$
+
+Then you have to find the following:
+
+* (real) frequency response: $|H(\hat\omega)|$
+* phase response: $\angle H(\hat\omega)$
+
+### Frequency and Phase Response of 1st Order Filters
+
+$|H(\hat\omega)|^2=\dfrac{|b_0|^2+|b_1|^2+2b_0b_1\cos(\hat\omega)}{1+|a_1|^2-2a_1\cos(\hat\omega)}$
+
+$\angle H(\hat\omega) = atan\left(\dfrac{-b_1\sin(\hat\omega)}{b_0+b_1\cos(\hat\omega)}\right)-atan\left(\dfrac{a_1\sin(\hat\omega)}{1-a_1\cos(\hat\omega)}\right)$
+
+### Frequency and Phase Response of 2nd Order Filters
+
+It's so unintuitive that you should just use Matlab (TODO)
+
+## Design by Poles And Zeros
+
+* *zero*: placing a zero **on** the unit circle, forces the frequencies at $\hat\omega=\angle zero$ to be 0, and frequencies nearby to become quieter. This can be used for wide band-stop filters.
+* *pole*: placing a pole **near** but not on the unit circle, boosts the frequencies at $\hat\omega=\angle pole$ and the nearby frequencies to a lesser degree. This can be used for wide band-pass or peaking filters.
+
+Then you take the inverse z-transform:
+
+$\begin{aligned}H(z)&=\dfrac{(s_1+z^{-1})(s_2+z^{-1})}{(1-p_1z^{-1})(1-p_2z^{-1})}\\&=\dfrac{b_0+b_1z^{-1}+b_2z^{-2}}{1-a_1z^{-1}-a_2z^{-2}}\\h(n)&=b_0x[n]+b_1x[n-1]+b_2x[n-2]-a_1y[n-1]-a_2y[n-2]\end{aligned}$
+
+Notice that the book really likes to put negative signs on the $a$ coefficients, but like depends if you prefer to make it explicit that the $a$ coefficients are negative. Doesn't really matter.
+
+### Closed-Form of IIR Impulse Response in n-domain
+
+Do the inverse z-transform, this time using the tables of basic transforms and partial fraction expansion. This allows you to define the impulse response as a function without recursion:
+
+First you find the zeros and poles, if you don't know them already:
+
+$\begin{aligned}H(z)&=\dfrac{b_0+b_1z^{-1}+b_2z^{-2}+b_3z^{-3}}{1-a_1z^{-1}-a_2z^{-2}}\\&=\dfrac{(s_1+z^{-1})(s_2+z^{-1})(s_3+z^{-1})}{(1-p_1z^{-1})(1-p_2z^{-1})}\end{aligned}$
+
+Then you need to do partial fraction expansion, by using an illuminati operation:
+
+$H(z)=\dfrac{A}{1-p_1z^{-1}}+\dfrac{B}{1-p_1z^{-1}}+C$
+
+Now because of the superposition property of z-transforms, you can do the inverse z-transform on each by consulting a table:
+
+$h(n)=A(p_1^n)u[n]+B(p_2^n)u[n]+C\delta[n]$
+
+
+
+
+
+
+
+
 
