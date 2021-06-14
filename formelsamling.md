@@ -241,7 +241,7 @@ $x[n] = IDTFT\{X(\hat\omega)\}=\dfrac{1}{2\pi}\displaystyle\int_{-\pi}^\pi X(\ha
 
 ## Common DTFT Table
 
-TODO
+![image-20210614122947412](C:\Users\jonas\AppData\Roaming\Typora\typora-user-images\image-20210614122947412.png)
 
 ## Properties of DTFT Table
 
@@ -251,6 +251,8 @@ TODO
 | Time delay       | $x[n-n_d]$                | $X(\hat\omega)e^{-j\hat\omega n_d}$ |
 | Frequency shift  | $e^{j\hat\omega_0 n}h[n]$ | $X(\hat\omega - \hat\omega_0)$      |
 | Convolution      | $x[n]*h[n]$               | $X(\hat\omega)H(\hat\omega)$        |
+
+![image-20210614122921460](C:\Users\jonas\AppData\Roaming\Typora\typora-user-images\image-20210614122921460.png)
 
 ## Energy of a Signal
 
@@ -294,7 +296,11 @@ Notice how the formula for the inverse DFT is almost identical to the normal DFT
 
 ## Table of Common DFTs
 
-TODO
+![image-20210614143620899](C:\Users\jonas\AppData\Roaming\Typora\typora-user-images\image-20210614143620899.png)
+
+# Properties of DFTs
+
+![image-20210614143730225](C:\Users\jonas\AppData\Roaming\Typora\typora-user-images\image-20210614143730225.png)
 
 ## Fast Fourier Transform (FFT)
 
@@ -412,7 +418,7 @@ The roots of the **denominator** are called **poles**
 
 Because IIR filters have a feedback path in them, they decay exponentially and their impulse response approaches 0 asymptotically, but only reaches 0 after infinite time, therefore they are called infinite impulse response filters (IIR)
 
-## Stability
+## Stability	
 
 In order to be stable the following condition must be satisfied:
 
