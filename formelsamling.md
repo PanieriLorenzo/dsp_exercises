@@ -398,13 +398,13 @@ TODO
 
 IIR filters have feedback, i.e. their difference equation contains references to the output of the function, i.e. it's a form of discrete differential equation:
 
-$y[n]=\displaystyle\sum_{l=1}^{N}a_ly[n-l]+\sum_{k=0}^Mb_ky[n-k]$
+$y[n]=\displaystyle\sum_{l=1}^{N}a_ly[n-l]+\sum_{k=0}^Mb_kx[n-k]$
 
 This is the **general differential equation** you have two sums: previous outputs and previous inputs, multiplied with some coefficients. In this case our signal $x$ and the output $y$ are assumed to be 0 for negative times, i.e. we start the computation at index 0, and whenever we go out of bounds, i.e. have a negative index, we assume the value is 0.
 
 If we take the z-transform we get:
 
-$Y(z)=X(z)H(z)=X(z)\dfrac{b_0 + b_1z^{-1}+ b_2z^{-2} + \dots}{a_1z^{-1} + a_2z^{-2}+\dots}$
+$Y(z)=X(z)H(z)=X(z)\dfrac{b_0 + b_1z^{-1}+ b_2z^{-2} + \dots}{1 - a_1z^{-1} - a_2z^{-2}-\dots}$
 
 The roots of the **numerator** are called **zeros**
 
@@ -436,11 +436,11 @@ Sometimes it is represented in this more compact form, they are equivalent. This
 
 From z-domain system equation:
 
-$H(z) = \dfrac{b_0+b_1z^{-1}+\dots}{1 - a_1z^{-1} + \dots}$
+$H(z) = \dfrac{b_0+b_1z^{-1}+\dots}{1 - a_1z^{-1} - \dots}$
 
 Then insert $z = e^{j\hat\omega}$ to get the frequency and phase response, i.e. the complex frequency response:
 
-$H(\hat\omega)=\dfrac{b_0+b_1e^{-j\hat\omega}+\dots}{1-a_1e^{-j\hat\omega}+\dots}$
+$H(\hat\omega)=\dfrac{b_0+b_1e^{-j\hat\omega}+\dots}{1-a_1e^{-j\hat\omega}-\dots}$
 
 Then you have to find the following:
 
@@ -482,7 +482,7 @@ $H(z)=\dfrac{A}{1-p_1z^{-1}}+\dfrac{B}{1-p_1z^{-1}}+C$
 
 Now because of the superposition property of z-transforms, you can do the inverse z-transform on each by consulting a table:
 
-$h(n)=A(p_1^n)u[n]+B(p_2^n)u[n]+C\delta[n]$
+$h[n]=A(p_1^n)u[n]+B(p_2^n)u[n]+C\delta[n]$
 
 
 
