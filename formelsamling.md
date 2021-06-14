@@ -39,6 +39,8 @@ $$\Re\{A e^{j(\omega_0 t+\varphi)}\} = A\cos(\omega_0 t + \varphi)$$
 
 ### Regneregler
 
+TODO: rewrite this section with an in-depth step by step, see exercise 2.11
+
 $$\cos\theta = \dfrac{e^{j\theta} + e^{-j\theta}}{2}$$
 
 $$\sin\theta =\dfrac{e^{j\theta}-e^{-j\theta}}{2j}$$
@@ -173,7 +175,7 @@ If you have the impulse response of a system, you can filter a signal by taking 
 
 $y[n]=x[n]*h[n]$
 
-###### ![image-20210611145150546](image-20210611145150546.png)
+ ![image-20210611145150546](image-20210611145150546.png)
 
 For a finite impulse response of size $M$, the convolution is the same as the definition of FIR filters. I.e.:
 
@@ -434,7 +436,7 @@ Sometimes it is represented in this more compact form, they are equivalent. This
 
 ## Frequency Response From z-domain
 
-From z-domain system equation:
+From z-domain system function:
 
 $H(z) = \dfrac{b_0+b_1z^{-1}+\dots}{1 - a_1z^{-1} + \dots}$
 
@@ -464,7 +466,7 @@ It's so unintuitive that you should just use Matlab (TODO)
 
 Then you take the inverse z-transform:
 
-$\begin{aligned}H(z)&=\dfrac{(s_1+z^{-1})(s_2+z^{-1})}{(1-p_1z^{-1})(1-p_2z^{-1})}\\&=\dfrac{b_0+b_1z^{-1}+b_2z^{-2}}{1-a_1z^{-1}-a_2z^{-2}}\\h(n)&=b_0x[n]+b_1x[n-1]+b_2x[n-2]-a_1y[n-1]-a_2y[n-2]\end{aligned}$
+$\begin{aligned}H(z)&=\dfrac{(s_1-z^{-1})(s_2-z^{-1})}{(1-p_1z^{-1})(1-p_2z^{-1})}\\&=\dfrac{b_0+b_1z^{-1}+b_2z^{-2}}{1-a_1z^{-1}-a_2z^{-2}}\\y[n]&=b_0x[n]+b_1x[n-1]+b_2x[n-2]-a_1y[n-1]-a_2y[n-2]\\h[n]&=b_0\delta[n]+b_1\delta[n-1]+b_2\delta[n-2]-a_1h[n-1]-a_2h[n-2]\end{aligned}$
 
 Notice that the book really likes to put negative signs on the $a$ coefficients, but like depends if you prefer to make it explicit that the $a$ coefficients are negative. Doesn't really matter.
 
@@ -474,17 +476,19 @@ Do the inverse z-transform, this time using the tables of basic transforms and p
 
 First you find the zeros and poles, if you don't know them already:
 
-$\begin{aligned}H(z)&=\dfrac{b_0+b_1z^{-1}+b_2z^{-2}+b_3z^{-3}}{1-a_1z^{-1}-a_2z^{-2}}\\&=\dfrac{(s_1+z^{-1})(s_2+z^{-1})(s_3+z^{-1})}{(1-p_1z^{-1})(1-p_2z^{-1})}\end{aligned}$
+$\begin{aligned}H(z)&=\dfrac{b_0+b_1z^{-1}+b_2z^{-2}+b_3z^{-3}}{1-a_1z^{-1}-a_2z^{-2}}\\&=\dfrac{(s_1-z^{-1})(s_2-z^{-1})(s_3-z^{-1})}{(1-p_1z^{-1})(1-p_2z^{-1})}\end{aligned}$
 
 Then you need to do partial fraction expansion, by using an illuminati operation:
 
-$H(z)=\dfrac{A}{1-p_1z^{-1}}+\dfrac{B}{1-p_1z^{-1}}+C$
+$H(z)=\dfrac{A}{1-p_1z^{-1}}+\dfrac{B}{1-p_2z^{-1}}+C$
 
 Now because of the superposition property of z-transforms, you can do the inverse z-transform on each by consulting a table:
 
 $h(n)=A(p_1^n)u[n]+B(p_2^n)u[n]+C\delta[n]$
 
+# Appendix A - Mat C,B,A Regneregler
 
+TODO
 
 
 

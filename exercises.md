@@ -77,9 +77,37 @@ b = (sqrt(3) - j*3)^10
 
 Skipped the rest cause it's the same.
 
-## Exercise 2.11 - TODO
+## Exercise 2.11 - Sum of Sinusoids of Same Frequency
 
-![image-20210609140233898](image-20210609140233898.png)
+![image-20210614124310589](image-20210614124310589.png)
+
+Rewrite into exponential form and factor out $e^{j\omega t}$ frequency component to get the three phase and amplitude phasors without any variables.
+
+$x(t)=\Re\{(e^{-j\pi}+e^{j\pi/3}+2e^{-j\pi/3})e^{j\omega t}\}$
+
+Now I write each of the three phasors in cartesian form:
+
+* $e^{j\pi}\to \cos(\pi)+j\sin(\pi)=-1+j0$
+* $e^{j\pi/3}\to\cos(\pi/3)+j\sin(\pi/3)=\frac{1}{2}+j\frac{\sqrt{3}}{2}$
+* $2e^{-j\pi/3}\to2\cos(-\pi/3)+j2\sin(-\pi/3)=1-j\sqrt{3}$
+
+Now we add everything together and simplify:
+
+$x(t)=\Re\{(\frac{1}{2}-j\frac{\sqrt{3}}{2})e^{j\omega t}\}$
+
+Now we need to get it back into standard sinusoid form, so we need to rewrite the phasor in polar form, and multiply the frequency component back on:
+
+$\varphi = \angle X = \operatorname{atan}\left(\dfrac{-\sqrt 3/2}{1/2}\right)=-\pi/3$
+
+$A=|X|=\sqrt{\left(-\sqrt 3/2\right)^2+\left(1/2\right)^2}=1$
+
+$x(t)=\Re\{e^{-j\pi/3}e^{j\omega t}\}$
+
+Now we can finally get the standard sinusoid form:
+
+$x(t)=\cos(\omega t - \pi/3)$
+
+**Note:** if you are feeling adventurous you can bypass the exponential form entirely, by doing some steps in your head.
 
 ## Exercise 2.17 - TODO
 
@@ -163,10 +191,6 @@ Bruh I don't feel like it.
 
 ![image-20210611120329336](image-20210611120329336.png)
 
-
-
-
-
 ## Exercise 4.8 -
 
 ## Exercise 4.12 -
@@ -174,4 +198,88 @@ Bruh I don't feel like it.
 ## Exercise 4.15 -
 
 ## Exercise 4.17 -
+
+# Chapter 5 (Week 4) - 
+
+## Exercise 5.1 -
+
+## Exercise 5.4 -
+
+## Exercise 5.6 -
+
+## Exercise 5.7 -
+
+## Exercise 5.13 -
+
+## Exercise 5.18 -
+
+# Chapter 6 (Week 5) -
+
+## Exercise 6.2 -
+
+## Exercise 6.6 -
+
+## Exercise 6.7 -
+
+## Exercise 6.13 -
+
+## Exercise 6.19 -
+
+## Exercise 6.23 -
+
+# Chapter 7 (Week 6) -
+
+## Exercise 7.1 -
+
+## Exercise 7.2 -
+
+## Exercise 7.8 -
+
+## Exercise 7.11 -
+
+# Chapter 8 (Week 7) -
+
+## Exercise 8.1 -
+
+## Exercise 8.2 -
+
+## Exercise 8.8 -
+
+# Chapter 9 (Week 8) -
+
+## Exercise 9.1 -
+
+## Exercise 9.3 -
+
+## Exercise 9.4 -
+
+## Exercise 9.6 -
+
+## Exercise 9.14 -
+
+# Chapter 10 (Week 9, 10) -
+
+## Exercise 10.1 -
+
+## Exercise 10.2 -
+
+## Exercise 10.3 -
+
+## Exercise 10.5 -
+
+## Exercise 10.6 -
+
+## Exercise 10.7 -
+
+## Exercise 10.8 -
+
+## Exercise 10.9 -
+
+## Exercise 10.11.3 -
+
+## Exercise 10.11.4 -
+
+## Exercise 10.11.5 -
+
+## Exercise 10.12 -
 
