@@ -193,7 +193,7 @@ $x[n]=Ae^{j\phi}e^{j\hat\omega n}$
 
 $\begin{aligned}y[n]&=\displaystyle\sum_k^M b_k Ae^{j\phi}e^{j\hat\omega (n-k)}\\&=\left(\sum_k^M b_k e^{j\hat\omega k}\right)Ae^{j\phi}e^{j\hat\omega n}\\&=\mathcal H(\hat\omega)Ae^{j\phi}e^{j\hat\omega n}\end{aligned} $
 
-This gives a formula for the response of the filter to a small set of frequencies:
+This gives a formula for the response of the filter to frequencies:
 
 $\mathcal H(\hat\omega)=\displaystyle\sum_k^M b_k e^{j\hat\omega k}$
 
@@ -205,15 +205,15 @@ $\mathcal H_3 = a\mathcal H_1 + b\mathcal H_2$
 
 Adding or scaling two frequency responses together gives a new frequency response, i.e. they are a linear combination.
 
-## Difference Equations
+## FIR Filter Difference Equations
 
 This is a difference equation:
 
 $y[n]=x[n] + x[n-1]$
 
-This is also a difference equation:
+A difference equation is the sum of all the samples multiplied by coefficients that make up the FIR filter, so in general:
 
-$y[n]=x[n] - y[n - 1]$
+$y[n]=\sum b_k x[n-k]$
 
 So a FIR filter with weights: $b=(1, 0.5, 0.33, 0.25)$
 
@@ -243,18 +243,11 @@ $x[n] = IDTFT\{X(\hat\omega)\}=\dfrac{1}{2\pi}\displaystyle\int_{-\pi}^\pi X(\ha
 
 ## Common DTFT Table
 
-![image-20210614122947412](C:\Users\jonas\AppData\Roaming\Typora\typora-user-images\image-20210614122947412.png)
+![image-20210614160356595](image-20210614160356595.png)
 
 ## Properties of DTFT Table
 
-| Name of Property | Time-domain               | Frequency-domain                    |
-| ---------------- | ------------------------- | ----------------------------------- |
-| Linearity        | $ax_1[n]+bx_2[n]$         | $aX_1(\hat\omega)+bX_2(\hat\omega)$ |
-| Time delay       | $x[n-n_d]$                | $X(\hat\omega)e^{-j\hat\omega n_d}$ |
-| Frequency shift  | $e^{j\hat\omega_0 n}h[n]$ | $X(\hat\omega - \hat\omega_0)$      |
-| Convolution      | $x[n]*h[n]$               | $X(\hat\omega)H(\hat\omega)$        |
-
-![image-20210614122921460](C:\Users\jonas\AppData\Roaming\Typora\typora-user-images\image-20210614122921460.png)
+![image-20210614160312201](image-20210614160312201.png)
 
 ## Energy of a Signal
 
@@ -298,13 +291,29 @@ Notice how the formula for the inverse DFT is almost identical to the normal DFT
 
 ## Table of Common DFTs
 
-![image-20210614143620899](C:\Users\jonas\AppData\Roaming\Typora\typora-user-images\image-20210614143620899.png)
+![image-20210614154439126](image-20210614154439126.png)
 
-# Properties of DFTs
+## Properties of DFTs
 
-![image-20210614143730225](C:\Users\jonas\AppData\Roaming\Typora\typora-user-images\image-20210614143730225.png)
+![image-20210614154402272](image-20210614154402272.png)
+
+## Computing DFT by Sampling DTFT
+
+If you need to calculate the N-point DFT of a signal with a well known DTFT, for example the unit impulse $\delta$, it is easier to sample the DTFT rather than compute the entire DFT sum. To do so, assume we have the DTFT, then you can turn it into a DFT by substituting $\hat\omega = (2\pi k/ N)$, where $k\in[0,N-1]$ is the index of the DFT, so:
+
+$\begin{aligned}DFT\{x\}&=DTFT\{x\}(2\pi k/N)\\X[k]&=X(2\pi k/N)\end{aligned}$
 
 ## Fast Fourier Transform (FFT)
+
+**If you just want to check your answers, here's Matlab for that**
+
+```matlab
+clear
+a = [1 0 0 0 0 0 0 0 0 0]
+A = fft(a)
+% 1 1 1 1 1 1 1 1 1 1
+stem(A) % plots FFT spectrum
+```
 
 The naïve DFT has a time complexity of $\mathcal O(N^2)$, a better algorithm called the Fast Fourier Transform has time complexity $\mathcal O(N\log N)$.
 
@@ -392,9 +401,17 @@ The part in parentheses is written as $H(z)$ and is called the system-function.
 
 ## Z-Transform of IIR Filters
 
-TODO
+$y[n]=\displaystyle\sum_{l=1}^{N}a_ly[n-l]+\sum_{k=0}^Mb_kx[n-k]$
 
-## Properties
+![image-20210614204310211](image-20210614204310211.png)
+
+Notice that the $a$ coefficients start from 1 rather than 0, this is because you can't refer to $y[n]$ in the definition of $y[n]$. Also the sign is inverted for some reason.
+
+## Common z-transforms Table
+
+![image-20210614234154471](image-20210614234154471.png)
+
+## Properties Table
 
 | Property                  | n-domain          | z-domain          | $\hat\omega$-domain                 |
 | ------------------------- | ----------------- | ----------------- | ----------------------------------- |
@@ -494,7 +511,195 @@ $h[n]=A(p_1^n)u[n]+B(p_2^n)u[n]+C\delta[n]$
 
 # Appendix A - Mat C,B,A Regneregler
 
-TODO
+Factoring 2nd degree polynomials:
+
+$ax^2+bx+c=(r_1-x)(r_2-x)$
+
+$r_1,r_2=\dfrac{-b\pm\sqrt{b^2-4ac}}{2a}$
+
+
+
+Exponentials regneregler:
+
+$(e^a)^b=e^{ab}$
+
+$e^ae^b=e^{a+b}$
+
+$1=e^0=e^{j0}=e^{j0\hat\omega}=e^{0\text{whatever the fuck you want lol}}$
+
+$re^{j\varphi}=r\cos(\varphi)+jr\sin(\varphi)=a+jb$
+
+$a+jb=\sqrt{a^2+b^2}e^{j\operatorname{atan}(b/a)}$
+
+
+
+Partial fraction decomposition:
+
+The easy way: use Matlab's `residue` function:
+
+```matlab
+b = [b2 b1 b0]
+a = [a2 a1 1]
+[r p k] = residue(b, a)
+% r will contain the numerators of each fraction
+% p will contain the roots of the denominator polynomials
+```
+
+The hard way: manually
+
+$\dfrac{b_0+b_1z^{-1}+b_2z^{-2}}{1-a_1z^{-1}-a_2z^{-2}}=\dfrac{(s_1-z^{-1})(s_2-z^{-1})}{(1-p_1z^{-1})(1-p_2z^{-1})}=\dfrac{A}{1-p_1z^{-1}}+\dfrac{B}{1-p_2z^{-1}}$
+
+$(s_1-z^{-1})(s_2-z^{-1})=A(1-p_2z^{-1})+B(1-p_1z^{-1})$
+
+Solve for A and B, usually by splitting the equation into a system of equations, if you can get the left hand side to look like (something + something) and the right hand side to be (something + something), then you split the equation containing just the left of the plus sign and just the right of the plus sign.
+
+In the general case:
+
+$\dfrac{P}{(factor_1)(factor_2)\dots(factor_n)}=\dfrac{A}{factor_1}+\dfrac{B}{factor_2}+\dots+\dfrac{Z}{factor_n}$
+
+$P=A(factor_2)\dots(factor_n)+B(factor_1)\dots(factor_n)+\dots+Z(factor_1)(factor_2)\dots$
+
+Essentially every letter is multiplied with every factor except the one below the letter.
+
+Then solve for $A,B,\dots,Z$
+
+# Appendix B - Matlab Reference
+
+For loops
+
+```matlab
+for i = min:step:max
+	% code goes here
+end
+```
+
+Functions
+
+```matlab
+function return_variable = function_name(parameters)
+	% code goes here
+	return_variable = result
+end
+```
+
+Unit step function
+
+```matlab
+% unit step function
+function x = unit(n)
+if (n < 0)
+    x = 0;
+else
+    x = 1;
+end
+end
+```
+
+Cartesian to polar
+
+```matlab
+[theta rho] = cart2pol(real(n), imag(n))
+```
+
+Polar to cartesian
+
+```matlab
+[x y] = pol2cart(angle(n), abs(n))
+```
+
+Partial fraction expansion / decomposition
+
+```matlab
+[r p k] = residue([b2 b1 b0], [a2 a1 1])
+% where r are the numerator values
+% and p are the roots of each fraction's denominator
+```
+
+DFT
+
+```matlab
+a = [1 0 0 0 0 0 0 0 0 0]
+A = fft(a)
+% 1 1 1 1 1 1 1 1 1 1
+stem(A) % plots FFT spectrum
+```
+
+Equations manipulation
+
+```matlab
+syms x y z     % defines symbols, necessary to define symbolic equations
+eq = x == something   % this is how you assign an equation to a variable
+solve(eq, var)    % solves symbolically
+vpasolve(eq, var, [guess_min guess_max]) % solves numerically, guess is optional
+isolate(eq, var)  % isolates variable (solve but sometimes works different)
+subs(eq, old, new) % substitutes into equation
+subs(eq)   % updates all variables in equation
+simplify(eq) % simplify equation
+collect(eq)  % factorizes as much as possible
+expand(eq)   % multiplies everything out
+```
+
+Sampling
+
+```matlab
+n = min:step:max
+x = f(n)
+```
+
+Visualization / plotting
+
+```matlab
+plot(x, y)  % where x and y are vectors
+plotf(x, y) % where y is a function of x
+
+% multiple plots on the same figure
+plot(x, y)	% this and the next 2 are on the same figure
+hold on
+plot(x, y)
+plot(x, y)
+hold off
+plotf(x, y) % here a new figure starts
+hold on
+plotf(x, y)
+plotf(x, y)
+
+% plot circle
+function h = circle(x,y,r)
+th = 0:pi/50:2*pi;
+xunit = r * cos(th) + x;
+yunit = r * sin(th) + y;
+h = plot(xunit, yunit);
+end
+
+% pole-zero plot, requires function above to function
+circle(0,0,1)
+hold on
+plot([x y], 'x', 'MarkerSize', 10, 'LineWidth', 2) % poles
+plot([x y], 'o', 'MarkerSize', 10, 'LineWidth', 2) % zeros
+axis equal
+grid on
+hold off
+```
+
+Array / vector initialization, concatentation
+
+```matlab
+zeros(10) % array of ten zeros
+ones(10)  % array of ten ones
+[ones(5), zeros(5)] % concatenating arrays
+```
+
+symbolic sum / numeric sum
+
+```matlab
+% symbolic sum
+symsum(expr, index_variable, min, max)
+
+% numeric sum
+sum(array)
+```
+
+
 
 
 

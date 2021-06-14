@@ -205,7 +205,11 @@ Bruh I don't feel like it.
 
 ## Exercise 5.4 -
 
-## Exercise 5.6 -
+## Exercise 5.6 - (Skipped)
+
+![image-20210614180618970](image-20210614180618970.png)
+
+Not relevant for exam
 
 ## Exercise 5.7 -
 
@@ -217,7 +221,67 @@ Bruh I don't feel like it.
 
 ## Exercise 6.2 -
 
-## Exercise 6.6 -
+## Exercise 6.6 - z-Transform, Frequency Response, Convolution
+
+![image-20210614162046320](image-20210614162046320.png)
+
+**a)**
+
+First finding the z-transform of the filter:
+
+$h[n]=\delta[n]-\delta[n-4]$
+
+$H(z)=1-z^{-4}$
+
+Finding the frequency response by setting $z=e^{j\hat\omega}$
+
+$H(\hat\omega)=1-(e^{j\hat\omega})^{-4}=1-e^{-4j\hat\omega}$
+
+I couldn't get it to that form.
+
+
+
+**b)**
+
+$x[n]=4+\cos(0.25\pi n-\pi/4)$ is given
+
+$x[n-4]=4+\cos(0.25\pi (n-4) - \pi/4)$ is the time shifted input
+
+$=4+\cos(0.25\pi n - \pi -\pi/4)$
+
+$= 4+\cos(n \pi/4-\pi 5/4)$
+
+So the output will be:
+
+$y[n]=\cos(n \pi/4-\pi/4)-\cos(n\pi/4 - \pi 5/4)$
+
+In cartesian phasor form, factoring out the frequency phasor:
+
+$y[n]=\Re\{(\cos(-\pi/4)+j\sin(-\pi/4)-\cos(-\pi 5/4)-j\sin(-\pi5/4))e^{n \pi/4}\}$
+
+$y[n]=\Re\{(1/\sqrt 2-j 1/\sqrt 2+1/\sqrt2-j1/\sqrt{2})e^{n\pi/4}\}$
+
+$y[n]=\Re\{(\sqrt{2}-j\sqrt{2})e^{n\pi/4}\}$
+
+Now I re-write in polar form, using Wolfram Alpha
+
+$A=2, \varphi=-\pi/4$
+
+Finally the output in standard form is:
+
+$y[n]=2\cos(n \pi/4 -\pi/4)$
+
+
+
+**c)**
+
+For positive values of $n$ the two functions never cross because one has a maximum amplitude of 2, and the other one is shifted with a DC offset of 4 and has an amplitude of 1. So they are only the same for negative values of $n$, so when:
+
+$2\cos(n\pi/4 -\pi/4) = 0$
+
+... dunno
+
+
 
 ## Exercise 6.7 -
 
@@ -237,9 +301,35 @@ Bruh I don't feel like it.
 
 ## Exercise 7.11 -
 
-# Chapter 8 (Week 7) -
+# Chapter 8 (Week 7) - DFT & FFT
 
-## Exercise 8.1 -
+## Exercise 8.1 - Frequency Sampling
+
+![image-20210614152924717](image-20210614152924717.png)
+
+![image-20210614152933851](image-20210614152933851.png)
+
+**a)**
+
+$x = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0] =\delta[n]\quad n\in[0, 9]$
+
+$DTFT\{x\}=X(\hat\omega)=1$
+
+$DFT\{x\}=X(2\pi k/10)=[1,1,1,1,1,1,1,1,1,1]$
+
+Checking in Matlab:
+
+```matlab
+clear
+a = [1 0 0 0 0 0 0 0 0 0]
+A = fft(a)
+% 1 1 1 1 1 1 1 1 1 1
+stem(A) % plots FFT spectrum
+```
+
+**b)**
+
+Skipped rest of them
 
 ## Exercise 8.2 -
 
@@ -261,7 +351,49 @@ Bruh I don't feel like it.
 
 ## Exercise 10.1 -
 
-## Exercise 10.2 -
+## Exercise 10.2 - IIR Filter Impulse Response
+
+![image-20210614202338404](image-20210614202338404.png)
+
+![image-20210614202349742](image-20210614202349742.png)
+
+The smallest delay in the difference equation is 1 sample, so at $n=0$ and before, the output will be 0.
+
+The first step to finding the impulse response is taking the $z$ transform, this is done by putting all y terms in the denominator and all the x terms in the numerator, then the delay amount becomes the exponent of the $z$ variable:
+
+$H(z)=\dfrac{z^{-1}}{1-0.9z^{-1}+0.9z^{-2}}$
+
+Now I use Matlab to find the partial fraction decomposition, so we can find the closed-form impulse response:
+
+```matlab
+clear
+[r, p, k] = residue([1 0],[0.9 -0.9 1])
+[theta rho] = cart2pol(real(r), imag(r))
+% theta = 2×1    
+%   -0.4942
+%    0.4942
+%
+% rho = 2×1    
+%    0.6311
+%    0.6311
+
+[theta rho] = cart2pol(real(p), imag(p))
+% theta = 2×1    
+%    1.0766
+%   -1.0766
+%
+% rho = 2×1    
+%    1.0541
+%    1.0541
+```
+
+$H(z)=\dfrac{0.\overline5-j0.2993}{z^{-1}-0.5-j0.928}+\dfrac{0.\overline5+j0.2993}{z^{-1}-0.5+j0.928}$
+
+$H(z)=\dfrac{0.6311e^{-j0.4942}}{z^{-1}-1.0541e^{j1.0766}}+\dfrac{0.6311e^{j0.4942}}{z^{-1}-1.0541e^{-j1.0766}}$
+
+Now the inverse $z$ transform can get us the impulse response:
+
+...dunno
 
 ## Exercise 10.3 -
 
